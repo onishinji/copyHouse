@@ -1,0 +1,11 @@
+name: CopyHouse
+main: onishinji.hello.CopyHouse
+version: 1
+
+commands:
+    copy-list:
+        description: affiche les structures disponibles
+        usage: /copy-list
+    copy-undo:
+        description: Annule dernier coller
+        usage: /copy-undo
