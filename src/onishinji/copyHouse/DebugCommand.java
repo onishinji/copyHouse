@@ -39,18 +39,6 @@ public class DebugCommand implements CommandExecutor {
 				player.getWorld().getBlockAt(x, player.getLocation().getBlockY()-1, z).setType(Material.DIAMOND_ORE);
 			}
 		}
-		
-		ArrayList<Material>materials = new ArrayList<Material>();
-		materials.add(Material.WOOL);
-		materials.add(Material.STONE_BUTTON);
-		
-		int x = playerX;
-		for(Material m: materials)
-		{
-			x++;
-			player.getWorld().getBlockAt(x, player.getLocation().getBlockY(), playerZ).setType(m);
-				
-		}
 		return false;
 	}
 

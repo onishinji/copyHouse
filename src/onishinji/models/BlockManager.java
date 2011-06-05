@@ -27,10 +27,7 @@ public class BlockManager  implements Serializable{
 	private Material type;
 
 	private MyLocation location;
-	private float direction;
-
-	private DyeColor woolColor;
-	
+	private float direction;	
 	
 	public Material getType() {
 		return type;
@@ -64,14 +61,6 @@ public class BlockManager  implements Serializable{
 		return data;
 	}
 	
-	public void setWoolColor(DyeColor woolColor) {
-		this.woolColor = woolColor;
-	}
-
-	public DyeColor getWoolColor() {
-		return woolColor;
-	}
-
 	public BlockManager()
 	{
 		
@@ -89,17 +78,6 @@ public class BlockManager  implements Serializable{
 		this.type = block.getType();				
 		this.setDirection(block.getLocation().getPitch());		
 		this.location = new MyLocation(block.getLocation());
-		
-		if(block.getType() == Material.WOOL)
-		{
-			System.out.println("copie wool: data: " + block.getData());
-			if(block.getData() == 0xE)
-			{
-				System.out.println("block rouge detecte");
-				this.setWoolColor(DyeColor.RED);
-			}
-		//	this.setWoolColor(wool.getColor());
-		}
 		
 		return this;
 	}
