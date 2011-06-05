@@ -1,6 +1,6 @@
-package onishinji.hello.Listener;
+package onishinji.copyHouse.Listener;
 
-import onishinji.hello.CopyHouse;
+import onishinji.copyHouse.CopyHouse;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent;

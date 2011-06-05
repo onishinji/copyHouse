@@ -1,4 +1,4 @@
-package onishinji.hello;
+package onishinji.copyHouse;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

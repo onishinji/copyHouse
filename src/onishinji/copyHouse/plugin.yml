@@ -1,0 +1,14 @@
+name: CopyHouse
+main: onishinji.copyHouse.CopyHouse
+version: 1
+
+commands:
+    copy-list:
+        description: affiche les structures disponibles
+        usage: /copy-list
+    copy-undo:
+        description: Annule dernier coller
+        usage: /copy-undo
+    plane:
+        description: debug
+        usage: /plane

@@ -1,9 +1,11 @@
 package onishinji.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
-import onishinji.hello.CopyHouseManager;
+import onishinji.copyHouse.CopyHouseManager;
 
+import org.bukkit.DyeColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -11,6 +13,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.material.Directional;
 import org.bukkit.material.MaterialData;
+import org.bukkit.material.Wool;
 
 public class BlockManager  implements Serializable{
   
@@ -26,6 +29,7 @@ public class BlockManager  implements Serializable{
 	private MyLocation location;
 	private float direction;
 
+	private DyeColor woolColor;
 	
 	
 	public Material getType() {
@@ -60,9 +64,22 @@ public class BlockManager  implements Serializable{
 		return data;
 	}
 	
+	public void setWoolColor(DyeColor woolColor) {
+		this.woolColor = woolColor;
+	}
+
+	public DyeColor getWoolColor() {
+		return woolColor;
+	}
+
 	public BlockManager()
 	{
 		
+	}
+	
+	public boolean isWool()
+	{
+		return this.type == Material.WOOL;
 	}
 	
 	public BlockManager convertBlock(Block block)
@@ -72,8 +89,40 @@ public class BlockManager  implements Serializable{
 		this.type = block.getType();				
 		this.setDirection(block.getLocation().getPitch());		
 		this.location = new MyLocation(block.getLocation());
-		 
+		
+		if(block.getType() == Material.WOOL)
+		{
+			System.out.println("copie wool: data: " + block.getData());
+			if(block.getData() == 0xE)
+			{
+				System.out.println("block rouge detecte");
+				this.setWoolColor(DyeColor.RED);
+			}
+		//	this.setWoolColor(wool.getColor());
+		}
+		
 		return this;
+	}
+
+	public boolean isDirectionnalable() {
+		
+		ArrayList<Material> directionnables = new ArrayList<Material>();
+		directionnables.add(Material.BED);
+		directionnables.add(Material.BED_BLOCK);
+		directionnables.add(Material.BOOK);	
+		directionnables.add(Material.WOOD_STAIRS);
+		directionnables.add(Material.COBBLESTONE_STAIRS);
+		
+		for(Material t: directionnables)
+		{
+			if(t == this.type)
+			{
+				return true;
+			}
+		}
+		
+		
+		return false;
 	}
 
 }

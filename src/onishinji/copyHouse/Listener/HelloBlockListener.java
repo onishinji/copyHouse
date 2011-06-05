@@ -1,7 +1,7 @@
-package onishinji.hello.Listener;
+package onishinji.copyHouse.Listener;
 
-import onishinji.hello.CopyHouse;
-import onishinji.hello.CopyHouseManager;
+import onishinji.copyHouse.CopyHouse;
+import onishinji.copyHouse.CopyHouseManager;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block; 

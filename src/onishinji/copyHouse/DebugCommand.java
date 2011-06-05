@@ -1,4 +1,6 @@
-package onishinji.hello;
+package onishinji.copyHouse;
+
+import java.util.ArrayList;
 
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -38,6 +40,17 @@ public class DebugCommand implements CommandExecutor {
 			}
 		}
 		
+		ArrayList<Material>materials = new ArrayList<Material>();
+		materials.add(Material.WOOL);
+		materials.add(Material.STONE_BUTTON);
+		
+		int x = playerX;
+		for(Material m: materials)
+		{
+			x++;
+			player.getWorld().getBlockAt(x, player.getLocation().getBlockY(), playerZ).setType(m);
+				
+		}
 		return false;
 	}
 

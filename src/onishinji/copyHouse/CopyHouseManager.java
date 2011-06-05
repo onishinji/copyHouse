@@ -1,4 +1,4 @@
-package onishinji.hello;
+package onishinji.copyHouse;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -8,6 +8,7 @@ import onishinji.models.BlockManager;
 import onishinji.models.MyLocation;
 import onishinji.models.SLAPI;
 
+import org.bukkit.DyeColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -16,6 +17,7 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 import org.bukkit.material.Directional;
+import org.bukkit.material.Wool;
 
 /**
  * A utility class of which at most one instance can exist per VM.
@@ -208,8 +210,6 @@ public class CopyHouseManager {
 						for(int y = 0; y <= maxY;y++)
 						{ 
 							currentY = first.getLocation().getBlockY() + y;
-							 
-							 
 							
 							Block currentblock = world.getBlockAt(currentX, currentY, currentZ);
 							if(!currentblock.getLocation().equals(first.getLocation())
@@ -294,6 +294,7 @@ public class CopyHouseManager {
 				oui = false;
 				newLocation.setPitch(blockM.getDirection());
 				
+			
 				// Pour le undo
 				BlockManager oldBlock = new BlockManager();
 				oldBlock.setLocation(new MyLocation(newLocation));
@@ -304,7 +305,17 @@ public class CopyHouseManager {
 				// Modifie le block
 				world.getBlockAt(newLocation).setType(blockM.getType());
 				int newDirection = this.computeDataRotation(rotation, this.getDirectionFromData(blockM.getData()));
-				world.getBlockAt(newLocation).setData(this.getDataFromDirection(newDirection));	
+				
+				// Si c'est un block avec une direction
+				if(blockM.isDirectionnalable())
+				{
+					world.getBlockAt(newLocation).setData(this.getDataFromDirection(newDirection));	
+				}
+				else
+				{
+					// sinon c'est un block normal
+					world.getBlockAt(newLocation).setData(blockM.getData());
+				}
 				
 			}
 

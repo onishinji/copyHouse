@@ -1,8 +1,8 @@
-package onishinji.hello;
+package onishinji.copyHouse;
 
-import onishinji.hello.Listener.HelloBlockListener;
-import onishinji.hello.Listener.HelloEntityListener;
-import onishinji.hello.Listener.HelloPlayerListener;
+import onishinji.copyHouse.Listener.HelloBlockListener;
+import onishinji.copyHouse.Listener.HelloEntityListener;
+import onishinji.copyHouse.Listener.HelloPlayerListener;
 
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
@@ -63,7 +63,7 @@ public class CopyHouse extends JavaPlugin {
 		// crée le répertoire des structures
 		new File("plugins/copyHouse").mkdir(); 
 		
-		// getCommand("plane").setExecutor(new DebugCommand(this, "plane"));
+		getCommand("plane").setExecutor(new DebugCommand(this, "plane"));
 
 		// EXAMPLE: Custom code, here we just output some info so we can check
 		// all is well
