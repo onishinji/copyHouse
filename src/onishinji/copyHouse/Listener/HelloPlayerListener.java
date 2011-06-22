@@ -25,7 +25,7 @@ public class HelloPlayerListener extends PlayerListener {
 	
 	public void onPlayerJoin(PlayerJoinEvent event)
 	{
-		event.getPlayer().sendMessage("Salut " + event.getPlayer().getName());
+	//	event.getPlayer().sendMessage("Salut " + event.getPlayer().getName());
 		if(event.getPlayer().getWorld().getPlayers().size() > 0)
 		{
 			String connectedUsers = "";
@@ -33,11 +33,11 @@ public class HelloPlayerListener extends PlayerListener {
 			{
 				connectedUsers = connectedUsers + p.getName() +"  ";
 			} 
-			event.getPlayer().sendMessage("Liste des personnes connectés : " + connectedUsers);
+	//		event.getPlayer().sendMessage("Liste des personnes connectés : " + connectedUsers);
 		}
 		else
 		{
-			event.getPlayer().sendMessage("Tu es tout seul mon pote");
+		//	event.getPlayer().sendMessage("Tu es tout seul mon pote");
 		}
 	}
 

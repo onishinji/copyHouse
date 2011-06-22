@@ -4,6 +4,12 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
 import onishinji.models.BlockManager;
 import onishinji.models.MyLocation;
 import onishinji.models.SLAPI;
@@ -18,6 +24,8 @@ import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 import org.bukkit.material.Directional;
 import org.bukkit.material.Wool;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 /**
  * A utility class of which at most one instance can exist per VM.
@@ -184,7 +192,7 @@ public class CopyHouseManager {
 				}
 				
 				ArrayList<BlockManager> blocks = new ArrayList<BlockManager>();
-				int maxY = 128 - blockY;
+				int maxY = 127 - blockY;
 				
 				int maxX = second.getLocation().getBlockX() -  first.getLocation().getBlockX();
 				int maxZ = second.getLocation().getBlockZ() -  first.getLocation().getBlockZ();
@@ -246,6 +254,58 @@ public class CopyHouseManager {
 					
 					try {
 						SLAPI.save(this.motifs, "plugins/copyHouse/"+name+".bin");
+						 
+				        // export XML
+				        String root = "structure";
+
+				        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+				        DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+				        Document document = documentBuilder.newDocument();
+				        Element rootElement = document.createElement(root);
+				        document.appendChild(rootElement);
+
+				        for(BlockManager block : blocks)
+				        {
+
+                            Element blockEl = document.createElement("block");
+                            
+				            Element locationEl = document.createElement("location");
+
+                            Element locationXEl = document.createElement("x");
+                            Element locationYEl = document.createElement("y");
+                            Element locationZEl = document.createElement("z");
+                            
+                            locationXEl.appendChild(document.createTextNode(""+block.getLocation(null).getBlockX()));
+                            locationYEl.appendChild(document.createTextNode(""+block.getLocation(null).getBlockY()));
+                            locationZEl.appendChild(document.createTextNode(""+block.getLocation(null).getBlockZ()));
+                            
+                            
+                            locationEl.appendChild(locationXEl);
+                            locationEl.appendChild(locationYEl);
+                            locationEl.appendChild(locationZEl);
+                            
+
+                            Element typeEl = document.createElement("type");
+                            typeEl.appendChild(document.createTextNode(""+block.getType()));
+
+                            Element dataEl = document.createElement("data");
+                            dataEl.appendChild(document.createTextNode(""+block.getData()));
+
+                            blockEl.appendChild(typeEl);
+                            blockEl.appendChild(locationEl);
+                            blockEl.appendChild(dataEl);
+                            
+                            rootElement.appendChild(blockEl);
+				        } 
+ 
+				        
+				        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+				        javax.xml.transform.Transformer transformer = transformerFactory.newTransformer();
+				        DOMSource source = new DOMSource(document);
+				        StreamResult result = new StreamResult(new File("plugins/copyHouse/"+name+".xml"));
+				        transformer.transform(source, result);
+				        
+				        
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
