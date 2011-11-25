@@ -22,11 +22,10 @@ public class UndoCommand implements CommandExecutor {
         }
         Player player = (Player) sender;
 
-        HashMap<Player, Boolean> test = new HashMap<Player, Boolean>();
-        test.put(player, new Boolean(true));
+        CopyHouseManager.getInstance().undoLastPaste(player);
+        return true;
         
-	    
-		return false;
+	     
 	}
 
 }
